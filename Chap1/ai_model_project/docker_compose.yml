@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest  # Redis 이미지 사용
+    container_name: redis_server
+    ports:
+      - "6379:6379"  # Redis 포트 매핑
+
+  fastapi:
+    build: .  # 현재 디렉토리에서 Dockerfile로 빌드
+    container_name: fastapi_server
+    ports:
+      - "8080:8080"  # FastAPI 포트 매핑
+    depends_on:
+      - redis  # Redis가 먼저 실행되도록 의존성 설정
